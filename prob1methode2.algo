@@ -1,0 +1,39 @@
+ALGORITHM methode2
+VAR
+    htab:HASH_TABLE<element,INTEGER>
+    set1,set2,set  : ARRAY_OF INTEGER[];
+    sum,i,n,m,j,count :INTEGER:=0;
+BEGIN
+    i:=0;
+    WRITE("the length of the first set") ;
+    READ(n);
+    REPEAT
+        WRITE("give the element of first set");
+        READ(set1[i]);
+        i:=i+1;
+        UNTIL (i=n-1);
+    i:=0;
+    WRITE("the length of the second set") ;
+    READ(m);
+    REPEAT
+        WRITE("give the element of second set");
+        READ(set2[i]);
+        i:=i+1;
+        UNTIL (i=m-1);
+    set=set1+set2;
+
+    FOR i FROM 0 TO set.length -1 STEP 1  DO
+        IF (htab.lookup(set[i]) = TRUE) THEN
+            count := htab.get(set1[i]);
+            htab.insert(set[i],count+1);
+        ELSE
+            htab.insert(set[i],1);
+        END_IF
+    END_FOR
+    FOR i FROM 0 TO set.length -1 STEP 1  DO
+        IF (htab.get(set[i]) = 1) THEN
+            sum=sum+set[i];
+        END_IF
+    END_FOR
+    WRITE("la somme de valeur unique est ",sum);
+END
